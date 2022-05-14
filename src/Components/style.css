@@ -3,9 +3,11 @@
   margin: 0;
   font-family: "Macondo", cursive;
 }
+/* https://www.schemecolor.com/light-to-dark-blue.php */
+/* Colour palete for app */
 :root {
-  --primary-color: #755139ff;
-  --secondary-color: #d4b996ff;
+  --primary-color: #91BAD6
+  --secondary-color: #528AAE;
 }
 body {
   background-color: var(--primary-color);
