@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import urlcat from "urlcat";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -7,43 +8,45 @@ const Registration = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [confirmpw, setConfirmpw] = useState("");
+  const BACKEND = process.env.REACT_APP_BACKEND;
+
+  const url = urlcat(BACKEND, "/registration");
 
   ////////////CREATE USER////////////
-  //   const createUser = (userInfo) => {
-  //     fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(userInfo),
-  //     })
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         if (data.status === "success") {
-  //           alert("new account created - proceed to sign in");
-  //           navigate("/daybits/home");
-  //         }
-  //         if (data.error) {
-  //           setError(data.error);
-  //         }
-  //         if (data.status === "failed") {
-  //           alert("username taken. please choose another username");
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
+  const createUser = (userInfo) => {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          alert("new account created - proceed to sign in");
+          navigate("/login");
+        }
+
+        if (data.status === "failed") {
+          alert("username taken. please choose another username");
+        }
+      })
+      .catch((error) => {
+        setError(error);
+        alert(error);
+      });
+  };
 
   const handleClick = (event) => {
     event.preventDefault();
-    console.log("clicked");
+
     if (password !== confirmpw) {
       alert("passwords do not match");
     } else {
       const userInfo = { email, password }; //backend
-      console.log(userInfo);
-      //createUser(userInfo); //LINK to backend
+      //console.log(userInfo);
+      createUser(userInfo); //LINK to backend
     }
   };
 

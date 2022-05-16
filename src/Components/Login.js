@@ -1,8 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import urlcat from "urlcat";
+import { useAtom } from "jotai";
+import { loginAtom } from "../App";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [login, setLogin] = useAtom(loginAtom);
+  const BACKEND = process.env.REACT_APP_BACKEND;
+  const urlLogin = urlcat(BACKEND, "/login");
+  const urlLogout = urlcat(BACKEND, "/logout");
+
+  const checkUser = (userInfo) => {
+    fetch(urlLogin, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setLogin(true); //check that the cookie.user exists? should be on index page
+          alert("Login successful!");
+          navigate("/home");
+        }
+      })
+      .catch((error) => {
+        alert(`Login failed. Please try again or register as a new user`);
+      });
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    const userInfo = { email, password }; //backend
+    console.log(userInfo);
+    checkUser(userInfo); //LINK to backend
+  };
+
+  const handleClickLogout = () => {
+    fetch(urlLogout, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          setLogin(false); //check that the cookie.user exists? should be on index page
+          alert("Logout successful!");
+          navigate("/home");
+        }
+      })
+      .catch((error) => {
+        alert(`Logout failed`);
+      });
+  };
+
   return (
     <>
       <div className="loginform">
@@ -15,7 +76,6 @@ const Login = () => {
               role="tab"
               aria-controls="pills-login"
               aria-selected="true"
-              onClick={() => navigate(`/login`)}
             >
               Login
             </p>
@@ -44,7 +104,14 @@ const Login = () => {
           >
             <form>
               <div class="form-outline mb-4">
-                <input type="email" id="loginName" class="form-control" />
+                <input
+                  type="email"
+                  id="loginName"
+                  class="form-control"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
                 <label class="form-label" for="loginName">
                   Email
                 </label>
@@ -55,6 +122,9 @@ const Login = () => {
                   type="password"
                   id="loginPassword"
                   class="form-control"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
                 <label class="form-label" for="loginPassword">
                   Password
@@ -69,6 +139,7 @@ const Login = () => {
                 style={{ marginBottom: "10px", marginTop: "10px" }}
                 type="submit"
                 class="btn btn-primary btn-lg btn-block"
+                onClick={handleClick}
               >
                 Sign in
               </button>
@@ -84,6 +155,14 @@ const Login = () => {
                   </span>
                 </p>
               </div>
+              <button
+                style={{ marginBottom: "10px", marginTop: "10px" }}
+                type="submit"
+                class="btn btn-primary btn-lg btn-block"
+                onClick={handleClickLogout}
+              >
+                Logout
+              </button>
             </form>
           </div>
         </div>

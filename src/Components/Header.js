@@ -14,6 +14,7 @@ const Header = (props) => {
               Login
             </p>
           </li>
+
           <li class="p-2">
             <p class="nav-link" onClick={() => navigate(`/home`)}>
               Home
