@@ -5,6 +5,8 @@ import { loginAtom } from "../App";
 import Library from "./Library";
 import Main from "./Main";
 import About from "./About";
+import Login from "./Login";
+import Registration from "./Registration";
 
 const Protected = ({ children }) => {
   const [login, setLogin] = useAtom(loginAtom);
@@ -25,6 +27,8 @@ const ProtectedRoutes = () => {
     <div>
       <Routes>
         <Route path="/" element={<Outlet />} />
+        <Route path="login" element={<Login />} />
+        <Route path="registration" element={<Registration />} />
         <Route path="home" element={<Main />} />
         <Route
           path="library"
