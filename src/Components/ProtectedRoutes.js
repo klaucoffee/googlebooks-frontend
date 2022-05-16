@@ -38,14 +38,7 @@ const ProtectedRoutes = () => {
             </Protected>
           }
         />
-        <Route
-          path="about"
-          element={
-            <Protected>
-              <About />
-            </Protected>
-          }
-        />
+        <Route path="about" element={<About />} />
       </Routes>
     </div>
   );

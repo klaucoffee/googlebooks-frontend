@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import Library from "./Library";
 import Modal from "./Modal";
+import urlcat from "urlcat";
 
 const Card = ({ book }) => {
   const [show, setShow] = useState(false);

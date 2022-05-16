@@ -1,7 +1,20 @@
 import React from "react";
 import bookcoversample from "../images/bookcover_sample.jpg";
+import cross from "../images/close.png";
+import heart from "../images/heart.png";
+import edittext from "../images/edit-text.png";
+import Library from "./Library";
 
 const Modal = ({ bookItem, show, onClose }) => {
+  //ADD BOOK ITEM TO DATABASE
+  const handleLike = () => {
+    console.log("like");
+  };
+
+  const handleNotes = () => {
+    console.log("edit");
+  };
+
   if (!show) {
     return null;
   }
@@ -22,8 +35,8 @@ const Modal = ({ bookItem, show, onClose }) => {
     <>
       <div className="overlay">
         <div className="overlay-inner">
-          <button className="close" onClick={onClose}>
-            <i class="fas fa-times"></i>
+          <button id="close" onClick={onClose}>
+            <img src={cross} alt="cross" />
           </button>
           <div className="inner-box">
             <img src={thumbnail} alt="" />
@@ -36,6 +49,18 @@ const Modal = ({ bookItem, show, onClose }) => {
             </div>
           </div>
           <h4 className="description">{bookDescription}</h4>
+          <div className="iconbtns">
+            <button id="heart" style={{ color: "tomato" }} onClick={handleLike}>
+              <img src={heart} alt="heart" />
+            </button>
+            <button
+              id="writing"
+              style={{ color: "#bcd2e8" }}
+              onClick={handleNotes}
+            >
+              <img src={edittext} alt="edittext" />
+            </button>
+          </div>
         </div>
       </div>
     </>

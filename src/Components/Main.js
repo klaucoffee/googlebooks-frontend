@@ -16,7 +16,7 @@ const Main = () => {
   //GooglebooksAPI only can get max 40 results
 
   const googlebooksURL = `https://www.googleapis.com/books/v1/volumes?q='+${search}+'&orderBy=relevance&key=${API_KEY}+&maxResults=40`;
-  console.log(googlebooksURL);
+  //console.log(googlebooksURL);
 
   const searchBook = (event) => {
     fetch(googlebooksURL)
@@ -29,27 +29,6 @@ const Main = () => {
       .catch((error) => {
         console.log("There is an error");
       });
-
-    //fetch all journal entries of particular user
-    //USE THIS AFTER LOGIN SETTLED
-    //   useEffect(() => {
-    //     const showBookResults = () => {
-    //       fetch(googlebooksURL, {
-    //         method: "GET",
-    //         credentials: "include",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(),
-    //       })
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //           setSearchResults(data);
-    //         })
-    //         .catch((error) => console.log(error));
-    //     };
-    //     showBookResults();
-    //   }, [search, googlebooksURL]);
   };
 
   return (
