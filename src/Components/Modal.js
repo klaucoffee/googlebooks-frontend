@@ -1,7 +1,7 @@
 import React from "react";
 import bookcoversample from "../images/bookcover_sample.jpg";
 
-const Modal = ({ bookItem, show }) => {
+const Modal = ({ bookItem, show, onClose }) => {
   if (!show) {
     return null;
   }
@@ -22,7 +22,7 @@ const Modal = ({ bookItem, show }) => {
     <>
       <div className="overlay">
         <div className="overlay-inner">
-          <button className="close">
+          <button className="close" onClick={onClose}>
             <i class="fas fa-times"></i>
           </button>
           <div className="inner-box">

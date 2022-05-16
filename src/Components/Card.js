@@ -31,7 +31,11 @@ const Card = ({ book }) => {
                   <h3 className="author">{bookAuthor}</h3>
                 </div>
               </div>
-              <Modal show={show} bookItem={bookItem} />
+              <Modal
+                show={show}
+                bookItem={bookItem}
+                onClose={() => setShow(false)}
+              />
             </>
           );
         }
