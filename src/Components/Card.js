@@ -1,17 +1,33 @@
 import React from "react";
 import bookcoversample from "../images/bookcover_sample.jpg";
 
-const Card = () => {
+const Card = ({ book }) => {
+  console.log("fromcards", book);
   return (
-    <div>
-      <div className="card">
-        <img src={bookcoversample} alt="book cover sample" />
-        <div className="bottom">
-          <h3 className="author">Author</h3>
-          <h3 className="title">Title</h3>
-        </div>
-      </div>
-    </div>
+    <>
+      {book.map((item) => {
+        let thumbnail =
+          item.volumeInfo.imageLinks &&
+          item.volumeInfo.imageLinks.smallThumbnail;
+
+        let bookTitle = item.volumeInfo.title;
+
+        let bookAuthor = item.volumeInfo.authors;
+        if (thumbnail !== undefined) {
+          return (
+            <>
+              <div className="card">
+                <img src={thumbnail} alt="book cover sample" />
+                <div className="bottom">
+                  <h3 className="title">{bookTitle}</h3>
+                  <h3 className="author">{bookAuthor}</h3>
+                </div>
+              </div>
+            </>
+          );
+        }
+      })}
+    </>
   );
 };
 

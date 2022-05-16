@@ -1,9 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+// import urlcat from "urlcat";
 import "./style.css";
 import pic4 from "../images/pic4.jpg";
 import Card from "./Card";
 
-const main = () => {
+const API_KEY = process.env.REACT_APP_APIKEY;
+
+const Main = () => {
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState("");
+  const [load, setLoad] = useState(false); //not coded yet
+  const [error, setError] = useState(null); //not coded yet
+
+  //   GET https://www.googleapis.com/books/v1/volumes?q=flowers&orderBy=newest&key={API_KEY}
+  //GooglebooksAPI only can get max 40 results
+
+  const googlebooksURL = `https://www.googleapis.com/books/v1/volumes?q='+${search}+'&orderBy=relevance&key=${API_KEY}+&maxResults=40`;
+  console.log(googlebooksURL);
+
+  const searchBook = (event) => {
+    fetch(googlebooksURL)
+      .then((response) => response.json())
+      .then((data) => {
+        setSearchResults(data.items);
+        console.log("searchresults", searchResults);
+        setLoad(true);
+      })
+      .catch((error) => {
+        console.log("There is an error");
+      });
+
+    //fetch all journal entries of particular user
+    //USE THIS AFTER LOGIN SETTLED
+    //   useEffect(() => {
+    //     const showBookResults = () => {
+    //       fetch(googlebooksURL, {
+    //         method: "GET",
+    //         credentials: "include",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(),
+    //       })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //           setSearchResults(data);
+    //         })
+    //         .catch((error) => console.log(error));
+    //     };
+    //     showBookResults();
+    //   }, [search, googlebooksURL]);
+  };
+
   return (
     <>
       <div className="header">
@@ -16,8 +64,13 @@ const main = () => {
         <div className="row2">
           <h2>Search for Books</h2>
           <div className="search">
-            <input type="text" placeholder="Enter the book title" />
-            <button>
+            <input
+              type="text"
+              placeholder="Enter the book title"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <button onClick={searchBook}>
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
@@ -26,10 +79,10 @@ const main = () => {
         </div>
       </div>
       <div className="container">
-        <Card />
+        {load ? <Card book={searchResults} /> : <p></p>}
       </div>
     </>
   );
 };
 
-export default main;
+export default Main;
