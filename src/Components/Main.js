@@ -1,13 +1,17 @@
 import React from "react";
 import "./style.css";
 import pic4 from "../images/pic4.jpg";
+import Card from "./Card";
 
 const main = () => {
   return (
-    <div>
+    <>
       <div className="header">
         <div className="row1">
-          <h1> The world belongs to those who read - Rick Holland</h1>
+          <h1>
+            Reading builds worlds
+            <br /> in our minds
+          </h1>
         </div>
         <div className="row2">
           <h2>Search for Books</h2>
@@ -18,9 +22,13 @@ const main = () => {
             </button>
           </div>
           <img src={pic4} alt="bookcupboard" />
+          <h3>Real example of my bookshelf</h3>
         </div>
       </div>
-    </div>
+      <div className="container">
+        <Card />
+      </div>
+    </>
   );
 };
 

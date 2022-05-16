@@ -6,8 +6,8 @@
 /* https://www.schemecolor.com/light-to-dark-blue.php */
 /* Colour palete for app */
 :root {
-  --primary-color: #91BAD6
-  --secondary-color: #528AAE;
+  --primary-color: #bcd2e8;
+  --secondary-color: #1e3f66;
 }
 body {
   background-color: var(--primary-color);
@@ -31,10 +31,11 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(bg1.png); */
-  clip-path: circle(60% at left 300px);
-  z-index: -1;
+  background-image: url(../images/pic5.jpg);
+  background-repeat: no-repeat;
+  background-size: 850px 500px;
+  clip-path: circle(60% at left 300px); /*shape of mask*/
+  z-index: -1; /*Stack order - bring to back*/
 }
 .row2 {
   position: absolute;
@@ -49,10 +50,15 @@ html {
 }
 .row2 img {
   margin-top: 30px;
-  width: 250px;
+  width: 350px;
+  border-radius: 25px;
 }
 .row1 h1 {
+  position: absolute;
+  top: 10px;
   font-size: 3rem;
+  margin-top: 20px;
+  color: var(--secondary-color);
   text-align: center;
   margin-left: 35px;
   font-family: "Macondo", cursive;
@@ -82,7 +88,8 @@ html {
   margin: 0 auto;
   margin-top: 25px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 0.5fr));
+  /* grid-template-columns; change to autofit instead of 4 later */
+  grid-template-columns: repeat(4, minmax(200px, 0.5fr));
   grid-gap: 20px;
   box-sizing: border-box;
 }
@@ -96,6 +103,7 @@ html {
   text-align: center;
   position: relative;
 }
+
 .card:hover {
   transform: scale(0.9);
   background-color: rgba(255, 255, 255, 0.8);
@@ -111,15 +119,16 @@ html {
 }
 .card .bottom .title {
   font-size: 14px;
-  margin-bottom: 32px;
+  color: var(--primary-color);
+  margin-bottom: 30px;
 }
-.card .bottom .amount {
+.card .bottom .author {
   position: absolute;
   bottom: 10px;
   left: 10px;
   right: 10px;
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
+  /* background-color: var(--primary-color); */
+  color: var(--primary-color);
   font-size: 13px;
   font-weight: bold;
   padding: 0.2rem;
