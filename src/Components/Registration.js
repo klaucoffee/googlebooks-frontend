@@ -1,8 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [confirmpw, setConfirmpw] = useState("");
+
+  ////////////CREATE USER////////////
+  //   const createUser = (userInfo) => {
+  //     fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(userInfo),
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         if (data.status === "success") {
+  //           alert("new account created - proceed to sign in");
+  //           navigate("/daybits/home");
+  //         }
+  //         if (data.error) {
+  //           setError(data.error);
+  //         }
+  //         if (data.status === "failed") {
+  //           alert("username taken. please choose another username");
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log("clicked");
+    if (password !== confirmpw) {
+      alert("passwords do not match");
+    } else {
+      const userInfo = { email, password }; //backend
+      console.log(userInfo);
+      //createUser(userInfo); //LINK to backend
+    }
+  };
+
+  //   console.log("email", email);
+  //   console.log("pw", password);
+  //   console.log("cfmpw", confirmpw);
 
   return (
     <>
@@ -29,20 +76,33 @@ const Registration = () => {
               role="tab"
               aria-controls="pills-register"
               aria-selected="true"
-              onClick={() => navigate(`/registration`)}
             >
               Register
             </p>
           </li>
         </ul>
         <div class="form-outline mb-4">
-          <input type="email" id="registerEmail" class="form-control" />
+          <input
+            type="email"
+            id="registerEmail"
+            class="form-control"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
           <label class="form-label" for="registerEmail">
             Email
           </label>
         </div>
         <div class="form-outline mb-4">
-          <input type="password" id="registerPassword" class="form-control" />
+          <input
+            type="password"
+            id="registerPassword"
+            class="form-control"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
           <label class="form-label" for="registerPassword">
             Password
           </label>
@@ -52,6 +112,9 @@ const Registration = () => {
             type="password"
             id="registerRepeatPassword"
             class="form-control"
+            onChange={(e) => {
+              setConfirmpw(e.target.value);
+            }}
           />
           <label class="form-label" for="registerRepeatPassword">
             Repeat password
@@ -61,6 +124,7 @@ const Registration = () => {
           style={{ marginBottom: "10px", marginTop: "10px" }}
           type="submit"
           class="btn btn-primary btn-lg btn-block"
+          onClick={handleClick}
         >
           Register
         </button>

@@ -46,7 +46,7 @@ const Login = () => {
               <div class="form-outline mb-4">
                 <input type="email" id="loginName" class="form-control" />
                 <label class="form-label" for="loginName">
-                  Email or username
+                  Email
                 </label>
               </div>
 
