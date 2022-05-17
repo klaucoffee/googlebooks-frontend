@@ -1,20 +1,9 @@
 import React from "react";
-import bookcoversample from "../images/bookcover_sample.jpg";
 import cross from "../images/close.png";
-import heart from "../images/heart.png";
-import edittext from "../images/edit-text.png";
 import Library from "./Library";
+import Review from "./Review";
 
 const Modal = ({ bookItem, show, onClose }) => {
-  //ADD BOOK ITEM TO DATABASE
-  const handleLike = () => {
-    console.log("like");
-  };
-
-  const handleNotes = () => {
-    console.log("edit");
-  };
-
   if (!show) {
     return null;
   }
@@ -49,18 +38,16 @@ const Modal = ({ bookItem, show, onClose }) => {
             </div>
           </div>
           <h4 className="description">{bookDescription}</h4>
-          <div className="iconbtns">
-            <button id="heart" style={{ color: "tomato" }} onClick={handleLike}>
-              <img src={heart} alt="heart" />
-            </button>
-            <button
-              id="writing"
-              style={{ color: "#bcd2e8" }}
-              onClick={handleNotes}
-            >
-              <img src={edittext} alt="edittext" />
-            </button>
-          </div>
+          <Library
+            bookTitle={bookTitle}
+            bookAuthor={bookAuthor}
+            thumbnail={bookItem.volumeInfo.imageLinks.thumbnail}
+          />
+          <Review
+            bookTitle={bookTitle}
+            bookAuthor={bookAuthor}
+            thumbnail={bookItem.volumeInfo.imageLinks.thumbnail}
+          />
         </div>
       </div>
     </>
