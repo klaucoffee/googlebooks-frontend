@@ -28,7 +28,7 @@ const Library = ({ bookTitle, bookAuthor, thumbnail }) => {
         }
       })
       .catch((error) => {
-        alert("failed to add to library");
+        console.log("error", error);
       });
   };
 
