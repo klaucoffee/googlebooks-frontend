@@ -1,6 +1,6 @@
 import React from "react";
 import cross from "../images/close.png";
-import Library from "./Library";
+import SaveToLib from "./SaveToLib";
 import Review from "./Review";
 
 const Modal = ({ bookItem, show, onClose }) => {
@@ -38,7 +38,7 @@ const Modal = ({ bookItem, show, onClose }) => {
             </div>
           </div>
           <h4 className="description">{bookDescription}</h4>
-          <Library
+          <SaveToLib
             bookTitle={bookTitle}
             bookAuthor={bookAuthor}
             thumbnail={bookItem.volumeInfo.imageLinks.thumbnail}

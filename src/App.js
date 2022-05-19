@@ -1,7 +1,6 @@
 import "./App.css";
 import "./Components/style.css";
 import { atom, useAtom } from "jotai";
-import Main from "./Components/Main";
 import Header from "./Components/Header";
 import ProtectedRoutes from "./Components/ProtectedRoutes";
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Outlet, Routes, Route } from "react-router-dom";
 import { useAtom } from "jotai";
 import { loginAtom } from "../App";
+import SaveToLib from "./SaveToLib";
 import Library from "./Library";
 import Main from "./Main";
 import About from "./About";

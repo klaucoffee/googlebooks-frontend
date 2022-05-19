@@ -1,57 +1,43 @@
-import React, { useState } from "react";
-import heart from "../images/heart.png";
-
+import React, { useState, useEffect } from "react";
 import urlcat from "urlcat";
+import Card from "./Card";
+
 const BACKEND = process.env.REACT_APP_BACKEND;
 const url = urlcat(BACKEND, "/library");
 
-const Library = ({ bookTitle, bookAuthor, thumbnail }) => {
+const Library = () => {
+  //fetch all journal entries
   // const [bookTitle, setBookTitle] = useState("");
   // const [bookAuthors, setBookAuthors] = useState("");
+  // const [thumbnail, setThumbnail] = useState("");
   // const [error, setError] = useState("");
-  // const [dailyGoalAchieved, setDailyGoalAchieved] = useState(true);
   // const [createdAt, setCreatedAt] = useState("");
+  const [bookData, setBookData] = useState("");
 
-  const createLibraryRecord = (libraryRecord) => {
-    fetch(url, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(libraryRecord),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "success") {
-          alert("book added to library");
-        }
+  useEffect(() => {
+    const showLibrary = () => {
+      fetch(urlcat(BACKEND, "/library"), {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
       })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  };
+        .then((response) => response.json())
+        .then((data) => {
+          setBookData(data);
+        })
+        .catch((error) => console.log(error));
+    };
+    showLibrary();
+  }, []);
 
-  const saveToLibrary = (event) => {
-    event.preventDefault();
-    const libraryRecord = { bookTitle, bookAuthor, thumbnail }; //backend
-    console.log("libraryRecord", libraryRecord);
-    createLibraryRecord(libraryRecord); //LINK to backend;
-    // alert("book added to your library");
-  };
+  //console.log(bookData);
+  //WRITE FOR LOOP HERE
 
-  return (
-    <>
-      <button
-        className="iconbts"
-        id="heart"
-        style={{ color: "tomato" }}
-        onClick={saveToLibrary}
-      >
-        <img src={heart} alt="heart" />
-      </button>
-    </>
-  );
+  //NOT SURE IF CARD WILL WORK
+  return <div>{<Card bookData={bookData} />}</div>;
 };
 
 export default Library;

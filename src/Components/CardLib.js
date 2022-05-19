@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
 
-const Card = ({ book }) => {
-  const [show, setShow] = useState(false);
+const CardLib = ({ bookData }) => {
   const [bookItem, setBookItem] = useState("");
-
+  console.log(bookData);
   return (
     <>
-      {book.map((item) => {
+      {/* {bookData.map((item) => {
         let thumbnail =
           item.volumeInfo.imageLinks &&
           item.volumeInfo.imageLinks.smallThumbnail;
@@ -31,17 +29,13 @@ const Card = ({ book }) => {
                   <h3 className="author">{bookAuthor}</h3>
                 </div>
               </div>
-              <Modal
-                show={show}
-                bookItem={bookItem}
-                onClose={() => setShow(false)}
-              />
+             
             </>
           );
         }
-      })}
+      })} */}
     </>
   );
 };
 
-export default Card;
+export default CardLib;
