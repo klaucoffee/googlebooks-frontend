@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Outlet, Routes, Route } from "react-router-dom";
 import { useAtom } from "jotai";
 import { loginAtom } from "../App";
-import SaveToLib from "./SaveToLib";
 import Library from "./Library";
 import Main from "./Main";
 import About from "./About";
 import Login from "./Login";
 import Registration from "./Registration";
+import ReviewAll from "./ReviewAll";
+import Reviewbook from "./Reviewbook";
 
 const Protected = ({ children }) => {
   const [login, setLogin] = useAtom(loginAtom);
@@ -39,6 +40,8 @@ const ProtectedRoutes = () => {
             </Protected>
           }
         />
+        <Route path="review" element={<ReviewAll />} />
+        <Route path="review/:id" element={<Reviewbook />} />
         <Route path="about" element={<About />} />
       </Routes>
     </div>

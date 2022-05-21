@@ -34,9 +34,8 @@ const SaveToLib = ({ bookTitle, bookAuthor, thumbnail }) => {
   const saveToLibrary = (event) => {
     event.preventDefault();
     const libraryRecord = { bookTitle, bookAuthor, thumbnail }; //backend
-    console.log("libraryRecord", libraryRecord);
+
     createLibraryRecord(libraryRecord); //LINK to backend;
-    // alert("book added to your library");
   };
 
   return (

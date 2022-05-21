@@ -1,39 +1,31 @@
 import React, { useState } from "react";
+import "./style.css";
 
 const CardLib = ({ bookData }) => {
-  const [bookItem, setBookItem] = useState("");
-  console.log(bookData);
+  const bookDataArr = Array.from(bookData);
+
   return (
     <>
-      {/* {bookData.map((item) => {
-        let thumbnail =
-          item.volumeInfo.imageLinks &&
-          item.volumeInfo.imageLinks.smallThumbnail;
+      {bookDataArr.map((item) => {
+        let thumbnail = item.thumbnail;
 
-        let bookTitle = item.volumeInfo.title;
+        let bookTitle = item.bookTitle;
 
-        let bookAuthor = item.volumeInfo.authors;
+        let bookAuthor = item.bookAuthor;
         if (thumbnail !== undefined) {
           return (
             <>
-              <div
-                className="card"
-                onClick={() => {
-                  setShow(true);
-                  setBookItem(item);
-                }}
-              >
+              <div className="card">
                 <img src={thumbnail} alt="book cover sample" />
                 <div className="bottom">
                   <h3 className="title">{bookTitle}</h3>
                   <h3 className="author">{bookAuthor}</h3>
                 </div>
               </div>
-             
             </>
           );
         }
-      })} */}
+      })}
     </>
   );
 };

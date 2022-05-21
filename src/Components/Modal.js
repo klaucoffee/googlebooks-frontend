@@ -1,7 +1,7 @@
 import React from "react";
 import cross from "../images/close.png";
 import SaveToLib from "./SaveToLib";
-import Review from "./Review";
+import ReviewButton from "./ReviewButton";
 
 const Modal = ({ bookItem, show, onClose }) => {
   if (!show) {
@@ -43,7 +43,7 @@ const Modal = ({ bookItem, show, onClose }) => {
             bookAuthor={bookAuthor}
             thumbnail={bookItem.volumeInfo.imageLinks.thumbnail}
           />
-          <Review
+          <ReviewButton
             bookTitle={bookTitle}
             bookAuthor={bookAuthor}
             thumbnail={bookItem.volumeInfo.imageLinks.thumbnail}

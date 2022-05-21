@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import urlcat from "urlcat";
-import Card from "./Card";
+import CardLib from "./CardLib";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 const url = urlcat(BACKEND, "/library");
 
 const Library = () => {
-  //fetch all journal entries
-  // const [bookTitle, setBookTitle] = useState("");
-  // const [bookAuthors, setBookAuthors] = useState("");
-  // const [thumbnail, setThumbnail] = useState("");
-  // const [error, setError] = useState("");
-  // const [createdAt, setCreatedAt] = useState("");
   const [bookData, setBookData] = useState("");
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState("");
+  const [filter, setFilter] = useState(false);
 
   useEffect(() => {
     const showLibrary = () => {
@@ -28,16 +25,57 @@ const Library = () => {
         .then((data) => {
           setBookData(data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => alert("error"));
     };
     showLibrary();
   }, []);
 
-  //console.log(bookData);
-  //WRITE FOR LOOP HERE
+  const bookDataArr = Array.from(bookData);
+  //console.log(bookDataArr);
 
-  //NOT SURE IF CARD WILL WORK
-  return <div>{<Card bookData={bookData} />}</div>;
+  const searchLib = () => {
+    if (search.length === 1) {
+      ///emptied search
+      setFilter(false);
+    } else if (search.length > 0) {
+      const filterList = bookDataArr.filter((i) => {
+        //console.log("i", i.bookTitle.toLowerCase().toLowerCase());
+
+        return i.bookTitle.toLowerCase().includes(search.toLowerCase());
+      });
+
+      setSearchResults(filterList);
+      setFilter(true);
+    }
+  };
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    searchLib();
+  };
+
+  return (
+    <>
+      <div className="search">
+        <input
+          type="text"
+          placeholder="Search within your library"
+          value={search}
+          onChange={handleChange}
+        />
+        <button>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+      <div className="container">
+        {filter ? (
+          <CardLib bookData={searchResults} />
+        ) : (
+          <CardLib bookData={bookData} />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default Library;

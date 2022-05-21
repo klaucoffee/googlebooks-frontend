@@ -23,14 +23,14 @@ const Main = () => {
       .then((response) => response.json())
       .then((data) => {
         setSearchResults(data.items);
-        console.log("searchresults", searchResults);
+
         setLoad(true);
       })
       .catch((error) => {
         console.log("There is an error");
       });
   };
-
+  // console.log("searchresults", searchResults);
   return (
     <>
       <div className="header">

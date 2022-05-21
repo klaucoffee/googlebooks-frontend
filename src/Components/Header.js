@@ -26,6 +26,11 @@ const Header = (props) => {
             </p>
           </li>
           <li class="p-2">
+            <p class="nav-link" onClick={() => navigate(`/review`)}>
+              Reviews
+            </p>
+          </li>
+          <li class="p-2">
             <p class="nav-link" onClick={() => navigate(`/about`)}>
               About
             </p>
