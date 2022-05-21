@@ -27,7 +27,7 @@ const SaveToLib = ({ bookTitle, bookAuthor, thumbnail }) => {
         }
       })
       .catch((error) => {
-        console.log("error", error);
+        alert("error:", error);
       });
   };
 

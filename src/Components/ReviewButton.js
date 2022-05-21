@@ -1,27 +1,67 @@
-import React, { useState } from "react";
-import heart from "../images/heart.png";
+import React, { useEffect, useState } from "react";
 import edittext from "../images/edit-text.png";
+import urlcat from "urlcat";
+import { useNavigate, useParams } from "react-router-dom";
+import dayjs from "dayjs";
 
-const ReviewButton = () => {
-  // const [bookTitle, setBookTitle] = useState("");
-  // const [bookAuthors, setBookAuthors] = useState("");
-  // const [error, setError] = useState("");
-  // const [dailyGoalAchieved, setDailyGoalAchieved] = useState(true);
-  // const [createdAt, setCreatedAt] = useState("");
+const BACKEND = process.env.REACT_APP_BACKEND;
+const url = urlcat(BACKEND, "/review");
 
-  const savetoReview = (event) => {
-    event.previewDefault();
-    // const reviewRecord = { review }; //backend
+const ReviewButton = ({ bookTitle }) => {
+  const [loaded, setLoaded] = useState(false);
 
-    // createReviewRecord(reviewRecord); //LINK to backend;
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  //creating review record in datavbase
+  const createReviewRecord = (reviewRecord) => {
+    fetch(url, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reviewRecord),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          alert("review added");
+          //setLoaded(true);
+          navigate(`/review/${bookTitle}`);
+        }
+      })
+      .catch((error) => {
+        alert("error:", error);
+      });
   };
+
+  const savetoReview = () => {
+    const reviewRecord = { bookTitle };
+    //reviewRecord.reviewId = id;
+    reviewRecord.createdOn = dayjs().format("DD-MMM-YYYY");
+    console.log("saved to database", reviewRecord);
+    createReviewRecord(reviewRecord); //LINK to backend;
+  };
+
+  //get all review records back
+
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    savetoReview();
+    // if (loaded) {
+    //   navigate(`/review/${bookTitle}`);
+    // }
+  };
+
   return (
     <>
       <button
         className="iconbts"
         id="writing"
         style={{ color: "#bcd2e8" }}
-        onClick={savetoReview}
+        onClick={handleClick}
       >
         <img src={edittext} alt="edittext" />
       </button>

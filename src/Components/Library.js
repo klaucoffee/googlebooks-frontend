@@ -40,8 +40,9 @@ const Library = () => {
     } else if (search.length > 0) {
       const filterList = bookDataArr.filter((i) => {
         //console.log("i", i.bookTitle.toLowerCase().toLowerCase());
-
-        return i.bookTitle.toLowerCase().includes(search.toLowerCase());
+        if (typeof i.bookTitle === "string") {
+          return i.bookTitle.toLowerCase().includes(search.toLowerCase());
+        }
       });
 
       setSearchResults(filterList);

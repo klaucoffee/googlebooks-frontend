@@ -257,5 +257,10 @@ html {
 }
 
 .hoverNeed:hover {
-  /* color: red; */
+  color: var(--primary-color);
+}
+
+.form-control {
+  width: 80% !important;
+  margin: auto !important;
 }
