@@ -26,7 +26,7 @@ const ReviewButton = ({ bookTitle }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          alert("review added");
+          //alert("review added");
           //setLoaded(true);
           navigate(`/review/${bookTitle}`);
         }

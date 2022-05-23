@@ -11,6 +11,7 @@ const ReviewAll = () => {
   const navigate = useNavigate();
   const [reviewAll, setReviewAll] = useState("");
   const [load, setLoad] = useState(false);
+  const [loading, setLoading] = useState(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState(false);
   const [searchResults, setSearchResults] = useState("");
@@ -32,11 +33,12 @@ const ReviewAll = () => {
         .then((data) => {
           setReviewAll(data);
           setLoad(true);
+          setLoading(false);
         })
         .catch((error) => alert("error"));
     };
     getAllReviews();
-  }, [reviewAll]);
+  }, [loading]);
 
   //console.log("reviewall", reviewAll);
 
@@ -103,7 +105,10 @@ const ReviewAll = () => {
                       />
                     </td>
                     <td>
-                      <Deletebutton bookTitle={item.bookTitle} />
+                      <Deletebutton
+                        bookTitle={item.bookTitle}
+                        setLoading={setLoading}
+                      />
                     </td>
                   </tr>
                 );
@@ -125,7 +130,10 @@ const ReviewAll = () => {
                       />
                     </td>
                     <td>
-                      <Deletebutton bookTitle={item.bookTitle} />
+                      <Deletebutton
+                        bookTitle={item.bookTitle}
+                        setLoading={setLoading}
+                      />
                     </td>
                   </tr>
                 );

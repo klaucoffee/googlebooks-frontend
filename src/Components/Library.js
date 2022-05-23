@@ -10,6 +10,7 @@ const Library = () => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const [filter, setFilter] = useState(false);
+  const [loading, setLoading] = useState(null);
 
   useEffect(() => {
     const showLibrary = () => {
@@ -24,11 +25,12 @@ const Library = () => {
         .then((response) => response.json())
         .then((data) => {
           setBookData(data);
+          setLoading(false);
         })
         .catch((error) => alert("error"));
     };
     showLibrary();
-  }, []);
+  }, [loading]);
 
   const bookDataArr = Array.from(bookData);
   //console.log(bookDataArr);
@@ -70,9 +72,9 @@ const Library = () => {
       </div>
       <div className="container">
         {filter ? (
-          <CardLib bookData={searchResults} />
+          <CardLib bookData={searchResults} setLoading={setLoading} />
         ) : (
-          <CardLib bookData={bookData} />
+          <CardLib bookData={bookData} setLoading={setLoading} />
         )}
       </div>
     </>

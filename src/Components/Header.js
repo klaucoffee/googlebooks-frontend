@@ -6,32 +6,32 @@ const Header = (props) => {
   const navigate = useNavigate();
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="p-2">
-            <p class="nav-link" onClick={() => navigate(`/login`)}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="p-2">
+            <p className="nav-link" onClick={() => navigate(`/login`)}>
               Login
             </p>
           </li>
 
-          <li class="p-2">
-            <p class="nav-link" onClick={() => navigate(`/home`)}>
+          <li className="p-2">
+            <p className="nav-link" onClick={() => navigate(`/home`)}>
               Home
             </p>
           </li>
-          <li class="p-2">
-            <p class="nav-link" onClick={() => navigate(`/library`)}>
+          <li className="p-2">
+            <p className="nav-link" onClick={() => navigate(`/library`)}>
               My Library
             </p>
           </li>
-          <li class="p-2">
-            <p class="nav-link" onClick={() => navigate(`/review`)}>
+          <li className="p-2">
+            <p className="nav-link" onClick={() => navigate(`/review`)}>
               Reviews
             </p>
           </li>
-          <li class="p-2">
-            <p class="nav-link" onClick={() => navigate(`/about`)}>
+          <li className="p-2">
+            <p className="nav-link" onClick={() => navigate(`/about`)}>
               About
             </p>
           </li>

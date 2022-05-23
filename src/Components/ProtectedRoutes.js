@@ -40,7 +40,14 @@ const ProtectedRoutes = () => {
             </Protected>
           }
         />
-        <Route path="review" element={<ReviewAll />} />
+        <Route
+          path="review"
+          element={
+            <Protected>
+              <ReviewAll />
+            </Protected>
+          }
+        />
         <Route path="review/:id" element={<Reviewbook />} />
         <Route path="about" element={<About />} />
       </Routes>

@@ -29,7 +29,7 @@ const Reviewbook = () => {
   //   console.log("id", id);
   //   console.log(review);
   url.toString();
-  console.log(url);
+  //console.log(url);
 
   ////////////FIND REVIEW IF IT EXISTS//////////
 
@@ -77,7 +77,7 @@ const Reviewbook = () => {
 
   ////////////CREATE REVIEW////////////
   const createReview = (reviewInfo) => {
-    console.log(JSON.stringify(reviewInfo));
+    //console.log(JSON.stringify(reviewInfo));
     fetch(url, {
       method: "POST",
       credentials: "include",
@@ -89,7 +89,7 @@ const Reviewbook = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          alert("review submitted");
+          //   alert("review submitted");
         }
 
         if (data.status === "failed") {
@@ -102,6 +102,7 @@ const Reviewbook = () => {
   };
 
   const handleChange = (value) => {
+    setReview(editReviewBook);
     setLoad(false);
   };
   const handleClick = (event) => {

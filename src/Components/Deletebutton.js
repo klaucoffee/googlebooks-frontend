@@ -6,10 +6,10 @@ import deletepic from "../images/delete.png";
 const BACKEND = process.env.REACT_APP_BACKEND;
 const url = urlcat(BACKEND, `/review`);
 
-const Deletebutton = ({ bookTitle }) => {
+const Deletebutton = ({ bookTitle, setLoading }) => {
   const navigate = useNavigate();
 
-  //delete journal entry
+  //delete review
   const deleteReview = (bookinfo) => {
     console.log(JSON.stringify(bookinfo));
     console.log("url", url);
@@ -31,15 +31,15 @@ const Deletebutton = ({ bookTitle }) => {
   };
 
   const handleClick = () => {
-    console.log("click");
+    //console.log("click");
     const bookinfo = { bookTitle };
     deleteReview(bookinfo);
-    //navigate("/review")
+    setLoading(true);
   };
   return (
     <>
       <button onClick={handleClick}>
-        <img class="deletepic" src={deletepic} alt="deletepic" />
+        <img className="deletepic" src={deletepic} alt="deletepic" />
       </button>
     </>
   );
