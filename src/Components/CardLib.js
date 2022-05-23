@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Deletelibbutton from "./Deletelibbutton";
+import ReviewLibButton from "./ReviewLibButton";
 import "./style.css";
 
 const CardLib = ({ bookData, setLoading }) => {
@@ -26,6 +27,7 @@ const CardLib = ({ bookData, setLoading }) => {
                   <h3 className="title">{bookTitle}</h3>
                   <h3 className="author">{bookAuthor}</h3>
                 </div>
+                <ReviewLibButton bookTitle={bookTitle} />
               </div>
             </>
           );

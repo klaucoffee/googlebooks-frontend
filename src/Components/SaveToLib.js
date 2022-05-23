@@ -1,5 +1,5 @@
 import React from "react";
-import heart from "../images/heart.png";
+import plus from "../images/plus.png";
 import urlcat from "urlcat";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
@@ -42,11 +42,11 @@ const SaveToLib = ({ bookTitle, bookAuthor, thumbnail }) => {
     <>
       <button
         className="iconbts"
-        id="heart"
+        id="plus"
         style={{ color: "tomato" }}
         onClick={saveToLibrary}
       >
-        <img src={heart} alt="heart" />
+        <img src={plus} alt="plus" />
       </button>
     </>
   );
