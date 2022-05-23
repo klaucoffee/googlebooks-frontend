@@ -16,9 +16,8 @@ const Main = () => {
   //GooglebooksAPI only can get max 40 results
 
   const googlebooksURL = `https://www.googleapis.com/books/v1/volumes?q='+${search}+'&orderBy=relevance&key=${API_KEY}+&maxResults=40`;
-  //console.log(googlebooksURL);
 
-  const searchBook = (event) => {
+  const searchBook = () => {
     fetch(googlebooksURL)
       .then((response) => response.json())
       .then((data) => {
@@ -30,7 +29,17 @@ const Main = () => {
         console.log("There is an error");
       });
   };
-  // console.log("searchresults", searchResults);
+
+  const onKeyUp = (e) => {
+    if (e === "Enter") {
+      searchBook(search);
+    }
+  };
+
+  const handleSubmit = () => {
+    searchBook(search);
+  };
+
   return (
     <>
       <div className="header">
@@ -47,9 +56,12 @@ const Main = () => {
               type="text"
               placeholder="Enter the book title"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
+              onKeyUp={(e) => onKeyUp(e.key)}
             />
-            <button onClick={searchBook}>
+            <button onClick={handleSubmit}>
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
