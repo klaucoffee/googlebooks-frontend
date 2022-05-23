@@ -36,7 +36,7 @@ const ReviewAll = () => {
         .catch((error) => alert("error"));
     };
     getAllReviews();
-  }, []);
+  }, [reviewAll]);
 
   //console.log("reviewall", reviewAll);
 
@@ -62,9 +62,6 @@ const ReviewAll = () => {
     searchLib();
   };
 
-  //delete the review
-
-  console.log("search", search);
   return (
     <>
       <div className="search">

@@ -4,21 +4,22 @@ import urlcat from "urlcat";
 import deletepic from "../images/delete.png";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
+const url = urlcat(BACKEND, `/review`);
 
 const Deletebutton = ({ bookTitle }) => {
   const navigate = useNavigate();
 
   //delete journal entry
-  const deleteReview = (bookTitle) => {
-    const url = urlcat(BACKEND, `/review`);
-
+  const deleteReview = (bookinfo) => {
+    console.log(JSON.stringify(bookinfo));
+    console.log("url", url);
     fetch(url, {
       method: "DELETE",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(bookTitle),
+      body: JSON.stringify(bookinfo),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -31,7 +32,8 @@ const Deletebutton = ({ bookTitle }) => {
 
   const handleClick = () => {
     console.log("click");
-    deleteReview(bookTitle);
+    const bookinfo = { bookTitle };
+    deleteReview(bookinfo);
     //navigate("/review")
   };
   return (
