@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import urlcat from "urlcat";
 import CardLib from "./CardLib";
+import "./style.css";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
-const url = urlcat(BACKEND, "/library");
 
 const Library = () => {
   const [bookData, setBookData] = useState("");

@@ -1,87 +1,145 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import urlcat from "urlcat";
+import "./style.css";
+import Editbutton from "./Editbutton";
+import Deletebutton from "./Deletebutton";
 
 const BACKEND = process.env.REACT_APP_BACKEND;
 
 const ReviewAll = () => {
   const navigate = useNavigate();
+  const [reviewAll, setReviewAll] = useState("");
+  const [load, setLoad] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState(false);
+  const [searchResults, setSearchResults] = useState("");
 
-  const handleClick = () => {
-    navigate("/review/:id"); //need to fill in ID
+  const { id } = useParams();
+
+  //GET ALL REVIEWS FOR THIS USER
+  useEffect(() => {
+    const getAllReviews = () => {
+      fetch(urlcat(BACKEND, "/review"), {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setReviewAll(data);
+          setLoad(true);
+        })
+        .catch((error) => alert("error"));
+    };
+    getAllReviews();
+  }, []);
+
+  //console.log("reviewall", reviewAll);
+
+  //SEARCH within the reviews
+  const searchLib = () => {
+    if (search.length === 1) {
+      ///emptied search
+      setFilter(false);
+    } else if (search.length > 0) {
+      const filterList = reviewAll.filter((i) => {
+        //console.log("i", i.bookTitle.toLowerCase().toLowerCase());
+        if (typeof i.review === "string") {
+          return i.review.toLowerCase().includes(search.toLowerCase());
+        }
+      });
+
+      setSearchResults(filterList);
+      setFilter(true);
+    }
+  };
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    searchLib();
   };
 
-  //   useEffect(() => {
-  //     const getBookIDs = () => {
-  //       fetch(urlcat(BACKEND, "/library"), {
-  //         method: "GET",
-  //         credentials: "include",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(),
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           setBookData(data);
-  //         })
-  //         .catch((error) => alert("error"));
-  //     };
-  //     showLibrary();
-  //   }, []);
+  //delete the review
 
+  console.log("search", search);
   return (
-    <div>
+    <>
+      <div className="search">
+        <input
+          type="text"
+          placeholder="Search your reviews"
+          value={search}
+          onChange={handleChange}
+        />
+        <button>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
       <table class="table table-hover table-responsive-sm">
         <thead>
           <tr>
-            <th scope="col">Book ID</th>
-            <th scope="col">Title</th>
-            <th scope="col">Review</th>
+            <th scope="col">S/N</th>
+            <th scope="col">Book Title</th>
             <th scope="col">Reviewed on:</th>
+            <th scope="col">Review</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td onClick={handleClick}>BOOK TITLE</td>
-            <td>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum. Why do we use it? It is a long established fact that
-              a reader will be distracted by the readable content of a page when
-              looking at its layout. The point of using Lorem Ipsum is that it
-              has a more-or-less normal distribution of letters, as opposed to
-              using 'Content here, content here', making it look like readable
-              English. Many desktop publishing packages and web page editors now
-              use Lorem Ipsum as their default model text, and a search for
-              'lorem ipsum' will uncover many web sites still in their infancy.
-              Various versions have evolved over the years, sometimes by
-              accident, sometimes on purpose (injected humour and the like).
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {filter ? (
+            <>
+              {searchResults.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <th scope="row">{index}</th>
+                    <td>{item.bookTitle}</td>
+                    <td>{item.createdOn}</td>
+                    <td>{item.review}</td>
+                    <td>
+                      <Editbutton
+                        bookTitle={item.bookTitle}
+                        bookReview={item.review}
+                      />
+                    </td>
+                    <td>
+                      <Deletebutton bookTitle={item.bookTitle} />
+                    </td>
+                  </tr>
+                );
+              })}
+            </>
+          ) : load ? (
+            <>
+              {reviewAll.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <th scope="row">{index}</th>
+                    <td>{item.bookTitle}</td>
+                    <td>{item.createdOn}</td>
+                    <td>{item.review}</td>
+                    <td>
+                      <Editbutton
+                        bookTitle={item.bookTitle}
+                        bookReview={item.review}
+                      />
+                    </td>
+                    <td>
+                      <Deletebutton bookTitle={item.bookTitle} />
+                    </td>
+                  </tr>
+                );
+              })}
+            </>
+          ) : (
+            <tr>No Items</tr>
+          )}
         </tbody>
       </table>
-    </div>
+    </>
   );
 };
 
