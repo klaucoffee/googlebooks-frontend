@@ -71,9 +71,9 @@ const Reviewbook = () => {
     }
   }
 
-  console.log("editreviewbook", editReviewBook);
+  //   console.log("editreviewbook", editReviewBook);
 
-  console.log("load", load);
+  //   console.log("load", load);
 
   ////////////CREATE REVIEW////////////
   const createReview = (reviewInfo) => {

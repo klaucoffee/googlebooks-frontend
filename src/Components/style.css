@@ -94,6 +94,18 @@ html {
   grid-gap: 20px;
   box-sizing: border-box;
 }
+
+.containerAbout {
+  width: 65%;
+  margin: 0 auto;
+  margin-top: 25px;
+  display: grid;
+  /* grid-template-columns; autofit allows it to be responsive */
+  grid-template-rows: repeat(auto-fit, minmax(25px, 0.25fr));
+  grid-gap: 10px;
+  box-sizing: border-box;
+}
+
 .card {
   background-color: var(--secondary-color);
   border-radius: 1rem;

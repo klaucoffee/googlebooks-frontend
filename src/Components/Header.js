@@ -32,7 +32,7 @@ const Header = (props) => {
           </li>
           <li className="p-2">
             <p className="nav-link" onClick={() => navigate(`/about`)}>
-              About
+              About / Contact
             </p>
           </li>
         </ul>
