@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import urlcat from "urlcat";
+
 import "./style.css";
 import pic4 from "../images/pic4.jpg";
 import Card from "./Card";
