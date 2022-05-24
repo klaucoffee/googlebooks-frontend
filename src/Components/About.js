@@ -10,12 +10,13 @@ const About = () => {
   // };
   return (
     <div>
-      <div className="containerAbout">
-        <p>
+      <div className="containerAbout" style={{ fontSize: "large" }}>
+        <h3>
           This webapp is for any self-confessed bookworms who need to keep track
           of their personal libraries and who need to stop buying duplicates of
           the same books
-        </p>
+        </h3>
+        <br />
         <a href="https://github.com/klaucoffee/googlebooks-frontend">
           FRONTEND: Github repo for this project
         </a>

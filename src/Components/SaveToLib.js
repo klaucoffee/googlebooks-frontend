@@ -17,6 +17,9 @@ const SaveToLib = ({ bookTitle, bookAuthor, thumbnail }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        if (data.status === "not logged in") {
+          alert("please login to add books to library");
+        }
         if (data.status === "success") {
           alert("book added to library");
         }

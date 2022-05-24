@@ -25,6 +25,10 @@ const ReviewButton = ({ bookTitle }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        if (data.status === "not logged in") {
+          alert("please login to add book reviews");
+        }
+
         if (data.status === "success") {
           //alert("review added");
           //setLoaded(true);
