@@ -6,11 +6,6 @@ const BACKEND = process.env.REACT_APP_BACKEND;
 const url = urlcat(BACKEND, "/library");
 
 const SaveToLib = ({ bookTitle, bookAuthor, thumbnail }) => {
-  // const [bookTitle, setBookTitle] = useState("");
-  // const [bookAuthors, setBookAuthors] = useState("");
-  // const [error, setError] = useState("");
-  // const [createdAt, setCreatedAt] = useState("");
-
   const createLibraryRecord = (libraryRecord) => {
     fetch(url, {
       method: "POST",
