@@ -185,7 +185,7 @@ html {
   top: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(#73a5c6, #2e5984);
+  background: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,7 +209,7 @@ html {
   padding: 2px;
   border-width: 2px;
   border-color: var(--primary-color);
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 
 #close img {
