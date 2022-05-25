@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import Modal from "./Modal";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ book }) => {
-  const [show, setShow] = useState(false);
   const [bookItem, setBookItem] = useState("");
-  const [reveal, setReveal] = useState(false);
   const navigate = useNavigate();
   return (
     <>
@@ -23,9 +20,7 @@ const Card = ({ book }) => {
               <div
                 className="card"
                 onClick={() => {
-                  // setShow(true);
                   setBookItem(item);
-                  setReveal(true);
                   navigate(`/home/${item.id}`);
                 }}
               >
@@ -35,11 +30,6 @@ const Card = ({ book }) => {
                   <h3 className="author">{bookAuthor}</h3>
                 </div>
               </div>
-              {/* { reveal ? <Modal
-                // show={show}
-                bookItem={bookItem}
-                onClose={() => setShow(false)}
-              /> : <p>loading</p>} */}
             </>
           );
         }

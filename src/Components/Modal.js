@@ -6,12 +6,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const API_KEY = process.env.REACT_APP_APIKEY;
 
-// ({ bookItem, show, onClose });
-
 const Modal = () => {
   const { id } = useParams();
   console.log("id", id);
-  // const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState("");
   const [load, setLoad] = useState(false); //not coded yet
 
@@ -45,8 +42,6 @@ const Modal = () => {
     <>
       <div className="overlay">
         <div className="overlay-inner">
-          {/* <p>TESTING</p>
-          {load ? <p>{searchResults[0].volumeInfo.title}</p> : <p>NO</p>} */}
           {load ? (
             <>
               <button id="close" onClick={handleClick}>

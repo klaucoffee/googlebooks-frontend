@@ -8,8 +8,6 @@ const BACKEND = process.env.REACT_APP_BACKEND;
 const url = urlcat(BACKEND, "/review");
 
 const ReviewButton = ({ bookTitle }) => {
-  const [loaded, setLoaded] = useState(false);
-
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -30,8 +28,6 @@ const ReviewButton = ({ bookTitle }) => {
         }
 
         if (data.status === "success") {
-          //alert("review added");
-          //setLoaded(true);
           navigate(`/review/${bookTitle}`);
         }
       })
@@ -52,11 +48,7 @@ const ReviewButton = ({ bookTitle }) => {
 
   const handleClick = (event) => {
     event.preventDefault();
-
     savetoReview();
-    // if (loaded) {
-    //   navigate(`/review/${bookTitle}`);
-    // }
   };
 
   return (
