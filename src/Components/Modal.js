@@ -1,53 +1,87 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import cross from "../images/close.png";
 import SaveToLib from "./SaveToLib";
 import ReviewButton from "./ReviewButton";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Modal = ({ bookItem, show, onClose }) => {
-  if (!show) {
-    return null;
-  }
-  let thumbnail =
-    bookItem.volumeInfo.imageLinks &&
-    bookItem.volumeInfo.imageLinks.smallThumbnail;
+const API_KEY = process.env.REACT_APP_APIKEY;
 
-  let bookTitle = bookItem.volumeInfo.title;
+// ({ bookItem, show, onClose });
 
-  let bookAuthor = bookItem.volumeInfo.authors;
+const Modal = () => {
+  const { id } = useParams();
+  console.log("id", id);
+  // const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState("");
+  const [load, setLoad] = useState(false); //not coded yet
 
-  let bookPublisher = bookItem.volumeInfo.publisher;
+  const navigate = useNavigate();
 
-  let bookPublisherYear = bookItem.volumeInfo.publishedDate;
+  const googlebooksURL = `https://www.googleapis.com/books/v1/volumes?q='+${id}+'&orderBy=relevance&key=${API_KEY}+&maxResults=40`;
 
-  let bookDescription = bookItem.volumeInfo.description;
+  useEffect(() => {
+    const showModal = () => {
+      fetch(googlebooksURL)
+        .then((response) => response.json())
+        .then((data) => {
+          setSearchResults(data.items);
+          setLoad(true);
+        })
+        .catch((error) => {
+          console.log("There is an error");
+        });
+    };
+    showModal();
+  }, []);
+
+  console.log("searchitems", searchResults);
+  //console.log(searchResults[0].volumeInfo.title);
+
+  const handleClick = () => {
+    navigate("/home");
+  };
+
   return (
     <>
       <div className="overlay">
         <div className="overlay-inner">
-          <button id="close" onClick={onClose}>
-            <img src={cross} alt="cross" />
-          </button>
-          <div className="inner-box">
-            <img src={thumbnail} alt="" />
-            <div className="info">
-              <h1>{bookTitle}</h1>
-              <h3>{bookAuthor}</h3>
-              <h4>{bookPublisher}</h4>
-              <h4>{bookPublisherYear}</h4>
-              <br />
-            </div>
-          </div>
-          <h4 className="description">{bookDescription}</h4>
-          <SaveToLib
-            bookTitle={bookTitle}
-            bookAuthor={bookAuthor}
-            thumbnail={bookItem.volumeInfo.imageLinks.thumbnail}
-          />
-          <ReviewButton
-            bookTitle={bookTitle}
-            bookAuthor={bookAuthor}
-            thumbnail={bookItem.volumeInfo.imageLinks.thumbnail}
-          />
+          {/* <p>TESTING</p>
+          {load ? <p>{searchResults[0].volumeInfo.title}</p> : <p>NO</p>} */}
+          {load ? (
+            <>
+              <button id="close" onClick={handleClick}>
+                <img src={cross} alt="cross" />
+              </button>
+              <div className="inner-box">
+                <img
+                  src={searchResults[0].volumeInfo.imageLinks.thumbnail}
+                  alt=""
+                />
+                <div className="info">
+                  <h1>{searchResults[0].volumeInfo.title}</h1>
+                  <h3>{searchResults[0].volumeInfo.authors}</h3>
+                  <h4>{searchResults[0].volumeInfo.publisher}</h4>
+                  <h4>{searchResults[0].volumeInfo.publishedDate}</h4>
+                  <br />
+                </div>
+              </div>
+              <h4 className="description">
+                {searchResults[0].volumeInfo.description}
+              </h4>
+              <SaveToLib
+                bookTitle={searchResults[0].volumeInfo.title}
+                bookAuthor={searchResults[0].volumeInfo.authors}
+                thumbnail={searchResults[0].volumeInfo.imageLinks.thumbnail}
+              />
+              <ReviewButton
+                bookTitle={searchResults[0].volumeInfo.title}
+                bookAuthor={searchResults[0].volumeInfo.authors}
+                thumbnail={searchResults[0].volumeInfo.imageLinks.thumbnail}
+              />{" "}
+            </>
+          ) : (
+            <p>LOADING</p>
+          )}
         </div>
       </div>
     </>

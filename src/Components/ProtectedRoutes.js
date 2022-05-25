@@ -9,6 +9,7 @@ import Login from "./Login";
 import Registration from "./Registration";
 import ReviewAll from "./ReviewAll";
 import Reviewbook from "./Reviewbook";
+import Modal from "./Modal";
 
 const Protected = ({ children }) => {
   const [login, setLogin] = useAtom(loginAtom);
@@ -32,6 +33,7 @@ const ProtectedRoutes = () => {
         <Route path="login" element={<Login />} />
         <Route path="registration" element={<Registration />} />
         <Route path="home" element={<Main />} />
+        <Route path="home/:id" element={<Modal />} />
         <Route
           path="library"
           element={
@@ -40,6 +42,7 @@ const ProtectedRoutes = () => {
             </Protected>
           }
         />
+
         <Route
           path="review"
           element={

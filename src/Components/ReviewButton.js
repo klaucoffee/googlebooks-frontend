@@ -44,7 +44,7 @@ const ReviewButton = ({ bookTitle }) => {
     const reviewRecord = { bookTitle };
     //reviewRecord.reviewId = id;
     reviewRecord.createdOn = dayjs().format("DD-MMM-YYYY");
-    console.log("saved to database", reviewRecord);
+    // console.log("saved to database", reviewRecord);
     createReviewRecord(reviewRecord); //LINK to backend;
   };
 
