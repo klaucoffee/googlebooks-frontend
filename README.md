@@ -1,4 +1,4 @@
-## Google Books project - backend
+## Google Books project - frontend
 
 This webapp allows people to curate their own personal libraries and review books
 
