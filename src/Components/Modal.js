@@ -31,9 +31,6 @@ const Modal = () => {
     showModal();
   }, []);
 
-  console.log("searchitems", searchResults);
-  //console.log(searchResults[0].volumeInfo.title);
-
   const handleClick = () => {
     navigate("/home");
   };
