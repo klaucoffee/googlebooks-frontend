@@ -50,9 +50,6 @@ const ReviewButton = ({ bookTitle }) => {
     event.preventDefault();
 
     savetoReview();
-    // if (loaded) {
-    //   navigate(`/review/${bookTitle}`);
-    // }
   };
 
   return (

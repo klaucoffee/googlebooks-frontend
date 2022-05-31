@@ -3,11 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const About = () => {
   const navigate = useNavigate();
-  // const handleClick = () => {
-  //   navigate(
-  //     "mailto:krystlelau90@gmail.com?subject=Feedback%20about%20Bookworm%20web%20app"
-  //   );
-  // };
+
   return (
     <div>
       <div className="containerAbout" style={{ fontSize: "large" }}>
